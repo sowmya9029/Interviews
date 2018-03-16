@@ -2,8 +2,8 @@ import java.util.*;
 import java.io.*;
 import java.math.BigInteger;
 
-public class MaxPairwiseProduct {
-
+public class MaxPairwiseProduct
+{
 	static String getMaxPairwiseProduct(int[] numbers) {
 		BigInteger result = new BigInteger("1");
 		int n = numbers.length;
@@ -89,6 +89,48 @@ public class MaxPairwiseProduct {
 		int nextInt() {
 			return Integer.parseInt(next());
 		}
+	}
+
+	public void insert(int value) {
+
+		if (heapSize == data.length)
+
+			throw new HeapException("Heap's underlying storage is overflow");
+
+		else {
+
+			heapSize++;
+
+			data[heapSize - 1] = value;
+
+			siftUp(heapSize - 1);
+
+		}
+
+	}
+
+	private void siftUp(int nodeIndex) {
+
+		int parentIndex, tmp;
+
+		if (nodeIndex != 0) {
+
+			parentIndex = getParentIndex(nodeIndex);
+
+			if (data[parentIndex] > data[nodeIndex]) {
+
+				tmp = data[parentIndex];
+
+				data[parentIndex] = data[nodeIndex];
+
+				data[nodeIndex] = tmp;
+
+				siftUp(parentIndex);
+
+			}
+
+		}
+
 	}
 
 }

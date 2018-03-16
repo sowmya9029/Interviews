@@ -68,7 +68,6 @@ public class heap {
 	   array[heapifysize]=temp;
 	   heapifysize--;
 	   heapify(array,0);
-	   
 	   return temp;
 	}
 	
@@ -80,26 +79,7 @@ public class heap {
 		}
 		return deleteAnElementInHeap(array);
 	}
-	boolean searchTree(Node root,int data)
-	{
-		if(root==null)
-		{
-			return false;
 
-		}
-		if(root.data==data)
-		{
-			return true;
-		}
-		else if(root.data<data)
-		{
-			return searchTree(root.right, data);
-		}
-		else
-		{
-			return searchTree(root.left, data);
-		}
-	}
 	int heightTree(Node root)
 	{
 		if(root==null)
@@ -161,4 +141,45 @@ public class heap {
 			heapify(a,0);
 		}
 	}
+    public void insert(int value) {
+
+        if (heapSize == data.length)
+
+            throw new HeapException("Heap's underlying storage is overflow");
+
+        else {
+
+            heapSize++;
+
+            data[heapSize - 1] = value;
+
+            siftUp(heapSize - 1);
+
+        }
+
+    }
+
+    private void siftUp(int nodeIndex) {
+
+        int parentIndex, tmp;
+
+        if (nodeIndex != 0) {
+
+            parentIndex = getParentIndex(nodeIndex);
+
+            if (data[parentIndex] > data[nodeIndex]) {
+
+                tmp = data[parentIndex];
+
+                data[parentIndex] = data[nodeIndex];
+
+                data[nodeIndex] = tmp;
+
+                siftUp(parentIndex);
+
+            }
+
+        }
+
+    }
 }
