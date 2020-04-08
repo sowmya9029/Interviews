@@ -1,0 +1,119 @@
+Please use this Google doc to code during your interview. To free your hands for coding, we recommend that you use a headset or a phone with speaker option.
+
+Given a sorted array of unique integers, and a target number, return the element in the input array that is closest to the target number.
+
+For example:
+arr = [1, 2, 10, 100]   target = 50  => return 10
+
+
+
+Integer findClosestNumber(int [] array, int target) {
+
+int low = 0;
+int hi = array.length-1;
+
+// assumption of atleast one element in array.
+if(array.length == 0) {
+	throw new InvalidArgumentException(“Empty array is not a valid input”);
+}
+
+if(target <= array[low]) {
+	return array[low];
+} 
+if(target >= array[hi]) {
+	return array[hi];
+}
+while(low < hi) {
+	int mid = (low+hi)/2;
+	
+	if(array[mid] == target) {
+	return target;
+}
+else if(array[mid] > target) {
+	hi = mid-1;
+} 
+else {
+	low = mid+1;
+}
+}
+if(Math.abs(array[low]-target) > Math.abs(array[hi]-target)) {
+	return array[hi];
+} else {
+	return array[low];
+}
+}
+
+arr = [1, 2, 10, 100]   target = 50  => return 10
+arr = [1, 2, 10, 100]   target = 120  => return 100
+arr = [1, 2, 10, 100]   target = 0  => return 1
+arr = [1, 2, 10, 100]   target = 6  => return (2 | 10)
+arr = [1, 2, 10, 100]   target = 10  => return 10
+
+arr = [], target = 1 => expect an exception
+
+arr = [1], target = 100 => return 1
+arr = [10, 20, 30, 40, 50] target = 22 => return 20
+
+
+Question 2:
+
+2 -> “abc”
+3 -> “def”
+
+
+
+Given a string of integers “35”
+Return all possible letter combinations
+3 -> def
+5 -> jkl
+
+35-> dj, dk, dl, ej, ek, el, fj, fk, fl
+
+
+[2,  3 , 5 ]
+ [abc] [def] [jkl]
+ dj, dk, dl, ej, ek, el, fj, fk, fl
+
+a +  dj, dk, dl, ej, ek, el, fj, fk, fl
+b +  dj, dk, dl, ej, ek, el, fj, fk, fl
+c +  dj, dk, dl, ej, ek, el, fj, fk, fl
+
+
+
+// number = 35, 
+ ‘3’ -> def
+‘5’ -> jkl
+List<String> combinations(String number, HashMap<Character, String> mapping) {
+
+List<List<String>> combinations = new ArrayList<>();
+List<String> combs = new ArrayList<>();
+int size = 1;
+	for(int i=number.length()-size; i>=0;i--) {
+	if(!mapping.containsKey(number.charAt(i)) {
+	continue;
+}
+	if(combinations.get(size-1).size() > 0) {
+	List<String> wordsToAdd = combinations.get(size-1);
+String word = mapping.get(number.charAt(i));
+		for(int j=0;j<word.length();j++) {
+			for(String s : wordsToAdd) {
+			combs.put(word.charAt(i)+s);
+}
+}	
+}
+	// jkl
+else {
+		String word = mapping.get(number.charAt(i));
+	for(int j=0;j<word.length();j++) {
+	combs.put(word.charAt(i));
+}
+}
+combinations.put(combs);
+size++;
+combs.clear();
+}
+return combinations.get(size);
+
+}
+“def”
+[“”, “[j, k, l]”, “[dj, dk, dl, ej, ek, el, fj, fk, fl]”, []
