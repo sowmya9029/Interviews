@@ -9,7 +9,6 @@ public class BFS
 	BFS(Graphs graph)
 	{ 	 
 		this.graph = graph;
-
 	}
     
 	boolean search(int source, GraphNode destination)
@@ -43,10 +42,7 @@ public class BFS
 		}
 		return false;
 	}
-	
-	1 - 2,3,4
-	2, -5,6,7
-	3 - 8,9,0
-	
-	1,2,5,2,
+
 }
+
+

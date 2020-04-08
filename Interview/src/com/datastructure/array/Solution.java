@@ -116,4 +116,9 @@ static String isPangram(String[] strings) {
 		public static void main(String [] args) {
 				System.out.println(firstRepeatedWord("He	had		enough	enough.of;this nonsense."));
 }
+
+public int missingPositiveNumber(int a[])
+{
+    for(int k=;)
+}
 }

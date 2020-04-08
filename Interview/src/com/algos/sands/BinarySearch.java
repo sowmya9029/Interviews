@@ -7,15 +7,17 @@ public class BinarySearch
 	
 	boolean search(int low,int high,int key,int[] array)
 	{
-		if(low >= high ) {
+		if(low >= high)
+		{
 			return false;
 		}
+
 		int mid =low+(high-low)/2;
 		
 		if(key==array[mid])
-		{
-			return true;
-		}
+	    {
+		   return true;
+	    }
 //		if(low>high &&low+1==high)
 //		{		
 //			return false;
@@ -38,7 +40,7 @@ public class BinarySearch
 	          //last element 1st row
 	          while ( i < n && j >= 0 )
 	          {
-	             if ( mat[i][j] == x )
+	             if (mat[i][j] == x)
 	             {
 	                System.out.print("n Found at "+ i + " " + j);
 	                return;
@@ -50,10 +52,8 @@ public class BinarySearch
 	             else //  if mat[i][j] < x
 	               i++;
 	          }
-	         
 	          System.out.print("n Element not found");
 	          return;  // if ( i==n || j== -1 )
-	        
 	   }
 	int ceilSearch(int low,int high,int key,int[] a)
 	{

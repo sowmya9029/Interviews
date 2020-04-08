@@ -7,7 +7,7 @@ GraphNode destination;
 Edge(GraphNode source,GraphNode destination,int weight)
 {
 	this.source=source;
-	this.weight=weight;x
+	this.weight=weight;
 	this.destination=destination;
 }
 public int getWeight() {

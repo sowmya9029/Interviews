@@ -117,3 +117,13 @@ return combinations.get(size);
 }
 “def”
 [“”, “[j, k, l]”, “[dj, dk, dl, ej, ek, el, fj, fk, fl]”, []
+
+p.addAll(map.entrySet())
+Pq p= new pq<>(k,new comparator<Map.Entry<String,Integer>>(
+{
+
+public int compare(Entry<k,v> e1,Entry<k,v>e2)
+{
+
+})
+)

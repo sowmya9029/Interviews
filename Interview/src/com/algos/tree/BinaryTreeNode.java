@@ -7,9 +7,10 @@ public class BinaryTreeNode {
 	BinaryTreeNode right;
 	BinaryTreeNode left;
 	int data;
+
 	public BinaryTreeNode(int data) {
 		this.data=data;
-		right =null;
+		right = null;
 		left=null;
 		// TODO Auto-generated constructor stub
 	}

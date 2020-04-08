@@ -119,20 +119,17 @@ public class SingleLinkedList {
 
 	void reverseList()
 	{
-		SingleLinkedListNode current,temp,temp1;
+		SingleLinkedListNode current,temp_next,prev;
 		current=head;
-		temp=current.next;
-		temp1=temp.next;
-		current.next=null;
-		while(temp1!=null)
+		prev=null;
+		while(current!=null)
 		{
-			temp.next=current;
-			current=temp;
-			temp=temp1;
-			temp1=temp.next;
+			temp_next=current.next;
+		    current.next=prev;
+			prev = current;
+			current = temp_next;
 		}
-		temp.next=current;
-		head=temp;		 		 		 
+           head = prev;
 	}
 	//tortoise and hare
 	SingleLinkedListNode reverseFromMiddleList(SingleLinkedListNode middle)
@@ -150,6 +147,7 @@ public class SingleLinkedList {
 		temp=current.next;
 		temp1=temp.next;
 		current.next=null;
+
 		while(temp1!=null)
 		{
 			temp.next=current;
@@ -158,6 +156,7 @@ public class SingleLinkedList {
 			temp1=temp.next;
 		}
 		temp.next=current;
+
 		//link middle next to the reversed list
 		nodeBeforeMiddle.next=temp;
 		return head;		 		 		 
@@ -172,7 +171,7 @@ public class SingleLinkedList {
 		if(head.next!=null)
 		{
 			slow=head;
-			fast=slow.next;		
+			fast=head;
 			while(fast!=null&&fast.next!=null)
 			{
 				slow=slow.next;
@@ -193,35 +192,67 @@ public class SingleLinkedList {
 		//tamperList();
 		SingleLinkedListNode fast,slow,temp;
 		slow=head;
-		fast=slow.next;
+		fast=head;
 
-		while(fast!=null&&fast.next!=null&&fast!=slow)
+		while(fast!=null&&fast.next!=null)
 		{
 			slow=slow.next;
-			fast=fast.next.next;					
+			fast=fast.next.next;
+			if(fast==slow)
+			{
+				System.out.println("Loop Detected");
+				break;
+			}
 		}
-		if(fast==null || fast.next==null)
-		{
-			System.out.println("Happy Ending");
-		}
-		else
-		{
-			System.out.println("Sad Ending");
-			temp=head;
-			while(fast.next!=temp)				
+		//if(fast==null || fast.next==null)
+		//{
+		//	System.out.println("Happy Ending");
+		//}
+		//else
+		//{
+			//System.out.println("Sad Ending");
+			slow=head;
+			while(fast!=slow)
 			{
 				fast=fast.next;
-				if(fast==slow)
-				{
-					temp=temp.next;
-				}
+				slow =slow.next;
 			}
-			if(temp==fast.next)
+			if(slow==fast)
 			{
-				fast.next=null;
+				//slow.data is the start of the loop
 			}
 
-		}		
+		//}
+	}
+	public ListNode rotateRight(ListNode head, int k) {
+		if(head == null || head.next == null || k < 1)
+			return head;
+
+		ListNode current = head;
+		int listLength = 1;
+
+		// Find length of the list, we consider the first node as length 1
+		while(current.next != null)
+		{
+			listLength ++;
+			current = current.next;
+		}
+
+		// Calculate the real rotate distnace from the head to the rotation head
+		int realRotate = listLength - (k % listLength);
+
+		// Create cycle
+		current.next = head;
+
+		// Move head
+		for(int i = 0; i < realRotate; i ++)
+		{
+			head = head.next;
+			current = current.next;
+		}
+
+		current.next = null;
+		return head;
 	}
 	void deleteAtTail() 
 	{
@@ -239,7 +270,7 @@ public class SingleLinkedList {
 	void removeDuplicateElement()
 	{
 		SingleLinkedListNode temp,temp1;
-		temp=head;		
+		temp=head;
 		while(temp.next!=null)
 		{						
 			temp1=temp.next;
@@ -248,7 +279,6 @@ public class SingleLinkedList {
 				if(temp.data.equalsIgnoreCase(temp1.next.data))
 				{
 					System.out.println("same"+temp1.data);
-
 					temp1.next=temp1.next.next;
 					//delete(temp1.data);
 				}
@@ -259,6 +289,9 @@ public class SingleLinkedList {
 		}
 
 	}
+	125
+	 25 150
+
 	//5->2->1 ->null
 	//5-2->null
 	//result -> 0->5->1->null
@@ -295,7 +328,7 @@ public class SingleLinkedList {
 			b=Integer.parseInt(node2.data);
 
 		}
-		int sum=a+b;
+		int sum=a+b+carry;
 		carry=sum/10;
 		res.insertAtEnd(sum%10);
 
@@ -377,9 +410,22 @@ public class SingleLinkedList {
 		//		
 	}
 
+	int countNodes(SingleLinkedListNode head)
+	{
+		int count = 0;
+		SingleLinkedListNode temp = head;
+		while (temp != null)
+		{
+			temp = temp.next;
+			count++;
+		}
+		return count;
+	}
 
 	SingleLinkedListNode2 node;
 	boolean temp=false;
+
+
 	public boolean isPalindrome(SingleLinkedListNode2 head) {
 		node = head;     
 		if(head==null)

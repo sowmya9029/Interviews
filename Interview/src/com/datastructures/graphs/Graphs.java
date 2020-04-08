@@ -73,14 +73,12 @@ public class Graphs {
 	void Dijkstra(GraphNode source)
 	{
 		PriorityQueue<GraphNode> pq= new PriorityQueue<>(adjList.size(),new GraphNodeComparator());
-		
 		for(GraphNode node:adjList.keySet())
 		{
 			node.setDistance(Integer.MAX_VALUE);
 			pq.add(node);
 		}
 		source.setDistance(0);
-		
 		while(!pq.isEmpty())
 		{
 			GraphNode node=pq.poll();
@@ -100,9 +98,7 @@ public class Graphs {
 		}
 		
 	}
-	
 
-	
 	public GraphNode getGraphNode(int find)
 	{
 		for(GraphNode node : adjList.keySet())
