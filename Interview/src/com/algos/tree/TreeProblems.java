@@ -82,6 +82,48 @@ public class TreeProblems
     // return path;
 	}
 
+	// returns true if trees with roots as root1 and root2 are mirror
+	boolean isMirror(Node node1, Node node2)
+	{
+		// if both trees are empty, then they are mirror image
+		if (node1 == null && node2 == null)
+			return true;
+
+		// For two trees to be mirror images, the following three
+		// conditions must be true
+		// 1 - Their root node's key must be same
+		// 2 - left subtree of left tree and right subtree
+		//      of right tree have to be mirror images
+		// 3 - right subtree of left tree and left subtree
+		//      of right tree have to be mirror images
+		if (node1 != null && node2 != null && node1.key == node2.key)
+			return (isMirror(node1.left, node2.right)
+					&& isMirror(node1.right, node2.left));
+
+		// if neither of the above conditions is true then
+		// root1 and root2 are mirror images
+		return false;
+	}
+
+	//different way of writing
+
+	boolean areMirror(Node a, Node b)
+	{
+		/* Base case : Both empty */
+		if (a == null && b == null)
+			return true;
+
+		// If only one is empty
+		if (a == null || b == null)
+			return false;
+
+        /* Both non-empty, compare them recursively
+           Note that in recursive calls, we pass left
+           of one tree and right of other tree */
+		return a.data == b.data
+				&& areMirror(a.left, b.right)
+				&& areMirror(a.right, b.left);
+	}
 
 	public boolean sumOfPath(BinaryTreeNode root ,int sum)
 	{
@@ -94,6 +136,86 @@ public class TreeProblems
 			return true;
 		}
 		return sumOfPath(root.left,sum-root.data) ||sumOfPath(root.right,sum-root.data) ;
+	}
+	boolean isSibling(Node node, Node a, Node b)
+	{
+		// Base case
+		if (node == null)
+			return false;
+
+		return ((node.left == a && node.right == b) ||
+				(node.left == b && node.right == a) ||
+				isSibling(node.left, a, b) ||
+				isSibling(node.right, a, b));
+	}
+
+	// Recursive function to find level of Node 'ptr' in
+	// a binary tree
+	int level(Node node, Node ptr, int lev)
+	{
+		// base cases
+		if (node == null)
+			return 0;
+
+		if (node == ptr)
+			return lev;
+
+		// Return level if Node is present in left subtree
+		int l = level(node.left, ptr, lev + 1);
+		if (l != 0)
+			return l;
+
+		// Else search in right subtree
+		return level(node.right, ptr, lev + 1);
+	}
+
+	// Returns 1 if a and b are cousins, otherwise 0
+	boolean isCousin(Node node, Node a, Node b)
+	{
+		// 1. The two Nodes should be on the same level
+		//       in the binary tree.
+		// 2. The two Nodes should not be siblings (means
+		//    that they should not have the same parent
+		//    Node).
+		return ((level(node, a, 1) == level(node, b, 1)) &&
+				(!isSibling(node, a, b)));
+	}
+	boolean isBalanced(Node node)
+	{
+		int lh; /* for height of left subtree */
+
+		int rh; /* for height of right subtree */
+
+		/* If tree is empty then return true */
+		if (node == null)
+			return true;
+
+		/* Get the height of left and right sub trees */
+		lh = height(node.left);
+		rh = height(node.right);
+
+		if (Math.abs(lh - rh) <= 1
+				&& isBalanced(node.left)
+				&& isBalanced(node.right))
+			return true;
+
+		/* If we reach here then tree is not height-balanced */
+		return false;
+	}
+
+	/* UTILITY FUNCTIONS TO TEST isBalanced() FUNCTION */
+    /*  The function Compute the "height" of a tree. Height is the
+        number of nodes along the longest path from the root node
+        down to the farthest leaf node.*/
+	int height(Node node)
+	{
+		/* base case tree is empty */
+		if (node == null)
+			return 0;
+
+        /* If tree is not empty then height = 1 + max of left
+         height and right heights */
+		return 1 + Math.max(height(node.left), height(node.right));
 	}
 
 	public boolean existenceOfPathWithSum(BinaryTreeNode root ,int sum)

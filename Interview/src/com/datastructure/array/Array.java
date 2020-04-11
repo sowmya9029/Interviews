@@ -1,5 +1,6 @@
 package com.datastructure.array;
 
+
 import java.util.Arrays;
 
 public class Array
@@ -11,6 +12,8 @@ public class Array
     {
         // Make a bool array to mark visited cells.
         // Initially all cells are unvisited
+
+
         boolean[][] visited = new boolean[ROW][COL];
         int count = 0;
         for (int i = 0; i < ROW; ++i)
@@ -538,4 +541,48 @@ public class Array
 
     }
 }
+
+
+    public int subarraySum(int[] nums, int k) {
+        int sum =0;
+        HashMap<Integer> hashmap = new HashMap<Integer>();
+        for(int =0; i<nums.length;i++)
+        {
+          0
+        }
+    }
+
+       int getMaxRainTrpping(int[] towerHeights)
+       {
+           int maxseenSoFar,maxSeenLeft = 0;
+           int[] maxSeenRight = new maxSeenRight[towerHeights.length];
+
+           int rainwater =0 ;
+
+           for(int i= 0; i<towerHeights.length;i++)
+           {
+               if(towerHeights[i]>maxseenSoFar)
+               {
+                   maxseenSoFar = towerHeights[i];
+                   maxSeenRight[i] = maxseenSoFar;
+               }
+               else
+               {
+                   maxSeenRight[i] = maxseenSoFar;
+               }
+           }
+           for(int i= 0; i<towerHeights.length;i++)
+           {
+               rainwater = rainwater +Integer.max(Integer.min(maxSeenLeft,maxSeenRight[i]) - towerHeights[i],0);
+               if(towerHeights[i]>maxSeenLeft)
+               {
+                   maxSeenLeft = towerHeights[i];
+               }
+           }
+
+           return rainwater;
+       }
+}
+
+
 

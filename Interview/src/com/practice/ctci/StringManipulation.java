@@ -8,7 +8,30 @@
 //
 //public class StringManipulation {
 //
+//find longest substring non repeating
+
+int longestSubstring(String s){
+        int maxcount=0;
+        int i,j =0;
+        Set<Character> set = new HashSet<Character>();
+
+        while(i<s.length() && j<s.length()) {
+            if(!set.contains(s.charAt(j)))
+        {
+            j++;
+            maxcount = Math.max(,axCount,j-i);
+        } else {
+                set.remove(s.charAt(i));
+                i++;
+        }
+        }
+
+        }
+
+
+
 ////Find the first non-repeating character from a stream of characters
+
 //	StringBuilder replaceSpaces(String string ,String replaceWith)
 //	{
 //		StringBuilder s= new StringBuilder();
